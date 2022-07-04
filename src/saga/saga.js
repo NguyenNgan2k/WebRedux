@@ -6,7 +6,13 @@ function* getListPostSaga(action) {
         const data = yield call (async () => {
             return await axios.get('https://api.escuelajs.co/api/v1/products');
         });
-        yield put(getListPostSuccess(data));
+        let mockData = []
+        data.forEach(element => {
+            let _dt = Object.assign({}, element)
+            _dt.amount = Math.ceil(Math.random() * 10) + 1;
+            mockData.push(_dt)
+        });
+        yield put(getListPostSuccess(mockData));
     } catch (error) {
         // yield put(getListPostFail(error));
     }
