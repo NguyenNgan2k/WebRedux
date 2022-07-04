@@ -2,7 +2,10 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as todoAction from '../action/addStore';
 import { Link } from "react-router-dom";
-const products = [
+
+import * as _ from 'lodash';
+
+const productList = [
     {
         id: 1,
         title: 'Chasm City',
@@ -30,18 +33,28 @@ const products = [
     }
 ]
 function ListProduct(props) {
-    const { product } = props
+    const { store } = props
     const handleClick = (item) => {
-        props.actions.addstore(item)
+
+        const _filter = _.find(store, o => o.id === item.id)
+        
+        if(_filter){
+            let arrow = Object.assign({}, _filter)
+            arrow.amount = !_filter.amount ? 1 : (_filter.amount + 1);
+            props.actions.update_amount(arrow)
+        } else {
+            let arrow = Object.assign({}, item)
+            props.actions.add_store(arrow)
+        }
     }
     return (
         <div className="container product">
             <div className="header">
                 <h2>DANH SÁCH SẢN PHẨM</h2>
-                <Link  to = '/store' className="store">Store <span>({product.length})</span></Link>
+                <Link  to = '/store' className="store">Store <span>({store.length})</span></Link>
             </div>
             <div className="product_list">
-                {products.map((item) => {
+                {productList.map((item) => {
                     return (
                         <div className="product_item" key={item.id}>
                             <div className="title">Tên: {item.title}</div>
@@ -57,7 +70,7 @@ function ListProduct(props) {
 const mapStateToProps = state => {
     console.log(state)
     return {
-        product: state.addstore_reducer
+        store: state.addstore_reducer
     };
 }
 const mapDispatchToProps = (dispatch) => {

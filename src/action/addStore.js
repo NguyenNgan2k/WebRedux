@@ -1,17 +1,24 @@
-export const addstore = (item) => {
+export const add_store = (item) => {
     return {
         type: "ADD_STORE",
         payload: {
             id: item.id,
             title: item.title,
-            price: item.price
+            price: item.price,
+            amount: item.amount || 1
         }
     }
 };
-export const deletestore = (id) => {
+export const delete_store = (id) => {
     return {
         type: "DELETE_STORE",
-        payload: id
+        id
       
+    }
+};
+export const update_amount = (arrow) => {
+    return {
+        type: "UPDATE_AMOUNT",
+        arrow
     }
 };
