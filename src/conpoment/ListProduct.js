@@ -2,42 +2,18 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as todoAction from '../action/addStore';
 import { Link } from "react-router-dom";
+import { FaShoppingCart } from 'react-icons/fa';
 
 import * as _ from 'lodash';
-
-const productList = [
-    {
-        id: 1,
-        title: 'Chasm City',
-        price: 20000
-    },
-    {
-        id: 2,
-        title: 'Hoang tu be',
-        price: 53000
-    },
-    {
-        id: 3,
-        title: 'Harry Potter',
-        price: 92000
-    },
-    {
-        id: 4,
-        title: 'Xep hang lam gi',
-        price: 38500
-    },
-    {
-        id: 5,
-        title: 'Phieu luu ky',
-        price: 45000
-    }
-]
+import { useEffect } from "react";
 function ListProduct(props) {
-    const { store } = props
-    const handleClick = (item) => {
-
-        const _filter = _.find(store, o => o.id === item.id)
-        
+    useEffect(() => {
+        props.actions.getListPost();
+    }, [])
+    const { posts, load } = props;
+    const {stores} = props
+    function handleClick(item) {
+        const _filter = _.find(stores, o => o.id === item.id)
         if(_filter){
             let arrow = Object.assign({}, _filter)
             arrow.amount = !_filter.amount ? 1 : (_filter.amount + 1);
@@ -46,31 +22,38 @@ function ListProduct(props) {
             let arrow = Object.assign({}, item)
             props.actions.add_store(arrow)
         }
+        console.log(stores)
     }
     return (
         <div className="container product">
             <div className="header">
-                <h2>DANH SÁCH SẢN PHẨM</h2>
-                <Link  to = '/store' className="store">Store <span>({store.length})</span></Link>
+                <h2 className="name_list">LIST PRODUCT </h2>
+                <Link to='/store' className="store"><FaShoppingCart/><span>({stores?.length})</span></Link>
             </div>
-            <div className="product_list">
-                {productList.map((item) => {
+            {
+                load ? <h2 className="name_list">Data is loading from API...</h2> :
+                <div className="product_list">
+                {posts && posts.map((item) => {
                     return (
                         <div className="product_item" key={item.id}>
-                            <div className="title">Tên: {item.title}</div>
-                            <div className="price">Giá: {item.price}</div>
-                            <button className="app-store" onClick={() => handleClick(item)}>Add store</button>
+                            <img className="img" src={item.images[0]} />
+                            <div className="title">{item.title}</div>
+                            <div className="price">${item.price}</div>
+                            <button className="app-store" onClick={() => handleClick(item)}>Add to card</button>
                         </div>
                     )
                 })}
             </div>
+            }
+
         </div>
     );
 }
 const mapStateToProps = state => {
     console.log(state)
     return {
-        store: state.addstore_reducer
+        posts: state.reducer.posts,
+        stores: state.reducer.stores
     };
 }
 const mapDispatchToProps = (dispatch) => {

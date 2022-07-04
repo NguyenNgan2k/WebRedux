@@ -1,0 +1,6 @@
+export const GET_LIST_POST = 'GET_LIST_POST';
+export const GET_LIST_POST_SUCCESS = 'GET_LIST_POST_SUCCESS';
+export const GET_LIST_POST_FAIL = 'GET_LIST_POST_FAIL';
+export const ADD_STORE = 'ADD_STORE';
+export const DELETE_STORE = 'DELETE_STORE';
+export const UPDATE_AMOUNT = 'UPDATE_AMOUNT';

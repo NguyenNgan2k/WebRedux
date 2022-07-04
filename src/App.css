@@ -11,6 +11,10 @@
   }
 }
 /* css list product */
+body {
+  background:#121f3d;
+   
+}
 .header {
   display: flex;
   position: relative;
@@ -22,30 +26,30 @@
 .store{
   position: absolute;
   right: 0;
-  background-color: rgb(7, 34, 110);
+  background-color: rgb(227 91 25);
   color: #fff;
   font-weight: bold;
   padding: 10px;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
 }
 .product_list {
   margin-top: 50px;
-  display: flex;  
+  display: grid;  
+  grid-template-columns: auto auto auto auto;
+  text-align: center;
 }
 .product_item {
-  margin: 20px;
-  width: calc(100% / 3);
-  border: 1px solid aquamarine;
-  padding: 15px
+  margin: 12px;
+  padding: 15px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .app-store {
-  background-color: rgb(7, 34, 110);
-  color: #fff;
+  color: rgb(7, 34, 110);;
   font-weight: bold;
+  padding: 5px;
 }
 
 td {
-    border: 1px solid rgb(7, 34, 110);
     padding: 20px 40px;
     font-size: 20px;
  }
@@ -53,10 +57,44 @@ td {
   margin: 50px 0;
 }
 .bnt_slg {
-  border: 0px solid rgb(105, 104, 104);
+  border: 0px solid #fff !important;
   padding: 0px 8px;
   margin: 2px;
+ 
 }
 table {
   width: 100%;
+  background-color: #fff;
+  margin-top: 50px;
+}
+.img {
+  width: 100%;
+  z-index: 1;
+}
+.name_list {
+  color: #fff !important;
+}
+.title{
+  color: #fff !important;
+  font-weight: bold;
+  text-overflow: ellipsis;
+  margin: 10px 0;
+}
+.price {
+  margin: 10px 0;
+  color: rgb(175, 170, 170);
+}
+thead {
+  font-weight: bold;
+  background-color: #dee2e6;
+}
+.total_cart {
+  color: #fff;
+
+}
+tbody {
+  color: #3a3a3a;
+}
+.cart_img {
+ padding: 10px;
 }

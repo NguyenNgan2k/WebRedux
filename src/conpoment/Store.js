@@ -3,11 +3,11 @@ import * as todoAction from '../action/addStore';
 import { connect } from 'react-redux';
 import {Link} from 'react-router-dom'
 import _ from 'lodash';
-
+import { FaTrash } from 'react-icons/fa';
 function Store(props) {
-    const { store, actions } = props;
+    const { stores } = props;
     const handleOnclickDelete = (id) => {
-        actions.delete_store(id)
+        props.actions.delete_store(id)
     }
     const handleClickAdd = (item) => {
         let arrow = Object.assign({}, item)
@@ -29,35 +29,37 @@ function Store(props) {
     return (
         <div className="container ">
             <div className="header">
-                <h2 className='title_store'>DANH SÁCH SẢN PHẨM ĐÃ THÊM </h2>
-                <Link to = '/' className="store">Thêm Sách</Link>
+                <h2 className='name_list'>Cart</h2>
+                <Link to = '/' className="store">SHOPPING</Link>
             </div>
             <div className="pro_table">
                 <table>
                     <thead>
                         <tr>
                             <td>ID</td>
-                            <td>Tên sách</td>
-                            <td>Giá</td>
-                            <td>Số lượng</td>
+                            <td>Product</td>
+                            <td></td>
+                            <td>Price</td>
+                            <td>Number</td>
                             <td>Action</td>
-                            <td>Tổng</td>
+                            <td>Total</td>
                         </tr>
                     </thead>
                     <tbody>
                         {
-                            store.map((item, index) => {
+                            stores.map((item, index) => {
                                 return (
                                     <tr key={index}>
                                         <td>{item.id}</td>
+                                        <td className="cart_img"><img className="img" src={item.image} /></td>
                                         <td>{item.title}</td>
-                                        <td>{item.price}</td>
+                                        <td>${item.price}</td>
                                         <td>
                                             {item.amount}
                                             <button className="bnt_slg" onClick={() => handleClickAdd(item)}> + </button>
                                             <button className="bnt_slg" onClick={() => handleClickSub(item)}> - </button></td>
-                                        <td><button onClick={() => handleOnclickDelete(item.id)}>Xóa</button></td>
-                                        <td>{item.price * item.amount}</td>
+                                        <td><button className="bnt_slg"  onClick={() => handleOnclickDelete(item.id)}><FaTrash/></button></td>
+                                        <td>${item.price * item.amount}</td>
                                     </tr>
                                 )
                             })
@@ -68,7 +70,7 @@ function Store(props) {
             </div>
             <br/>
             <div className="payment">
-                <h5>Tổng thanh toán: {_.reduce(store, (sum, o) => sum +  o.amount * o.price, 0) }</h5>
+                <h5 className="total_cart">Cart Total: ${_.reduce(stores, (sum, o) => sum +  o.amount * o.price, 0) }</h5>
             </div>
         </div>
     );
@@ -76,7 +78,7 @@ function Store(props) {
 const mapStateToProps = state => {
     console.log(state)
     return {
-        store: state.addstore_reducer
+        stores: state.reducer.stores
     };
 }
 const mapDispatchToProps = (dispatch) => {
