@@ -3,9 +3,10 @@ import { bindActionCreators } from "redux";
 import * as todoAction from '../action/addStore';
 import { Link } from "react-router-dom";
 import { FaShoppingCart } from 'react-icons/fa';
-
+import { FaHouseDamage} from 'react-icons/fa';
 import * as _ from 'lodash';
 import { useEffect } from "react";
+
 function ListProduct(props) {
     useEffect(() => {
         props.actions.getListPost();
@@ -28,7 +29,8 @@ function ListProduct(props) {
         <div className="container product">
             <div className="header">
                 <h2 className="name_list">LIST PRODUCT </h2>
-                <Link to='/store' className="store"><FaShoppingCart /><span>({stores?.length})</span></Link>
+                <Link to='/admin' className="admin"> Admin<FaHouseDamage/></Link>
+                <Link to='/store' className="store">Cart<FaShoppingCart /><span className="amount">{stores?.length}</span></Link>
             </div>
             {
                 load ? <h2 className="name_list">Data is loading from API...</h2> :

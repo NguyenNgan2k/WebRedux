@@ -26,7 +26,6 @@ body {
 .store{
   position: absolute;
   right: 0;
-  background-color: rgb(227 91 25);
   color: #fff;
   font-weight: bold;
   padding: 10px;
@@ -52,6 +51,7 @@ body {
 td {
     padding: 20px 40px;
     font-size: 20px;
+    text-align: center;
  }
 .title_store {
   margin: 50px 0;
@@ -97,4 +97,52 @@ tbody {
 }
 .cart_img {
  padding: 10px;
+}
+
+.amount {
+  position: absolute;
+  top: 0px;
+  right: -5px;
+  width: 20px;
+  height: 20px;
+ font-size: 12px;
+ border-radius: 50%;
+ text-align: center;
+ background-color: rgb(238, 174, 211);
+ 
+}
+/* admin-----------------*/
+.admin {
+  position: absolute;
+  right: 100px;
+  color: #fff;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 0.5rem;
+}
+.title_add {
+  font-weight: bold;
+  margin-top: 20px;
+}
+.add_new {
+  color: #fff;
+  position: absolute;
+  right: 0;
+  font-weight: bold;
+  background-color: rgb(238, 174, 211);
+  padding: 8px 25px;
+  border-radius: 1rem 1rem;
+}
+.admin_img {
+  width: 50%;
+  height: 100%;
+}
+
+.form_add {
+  background-color: #fff;
+  padding: 20px 40px;
+  margin-top: 50px;
+}
+.form-label{
+  font-weight: 500;
 }

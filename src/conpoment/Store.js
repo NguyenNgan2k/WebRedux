@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import {Link} from 'react-router-dom'
 import _ from 'lodash';
 import { FaTrash } from 'react-icons/fa';
+ 
 function Store(props) {
     const { stores } = props;
     const handleOnclickDelete = (item) => {
@@ -36,7 +37,7 @@ function Store(props) {
         <div className="container ">
             <div className="header">
                 <h2 className='name_list'>Cart</h2>
-                <Link to = '/' className="store">SHOPPING</Link>
+                <Link to = '/' className="store">Shopping</Link>
             </div>
             <div className="pro_table">
                 <table>
@@ -45,7 +46,7 @@ function Store(props) {
                             <td>ID</td>
                             <td>Product</td>
                             <td></td>
-                            <td>All Amount</td>
+                            <td>Amount</td>
                             <td>Price</td>
                             <td>Number</td>
                             <td>Action</td>
@@ -58,9 +59,9 @@ function Store(props) {
                                 return (
                                     <tr key={index}>
                                         <td>{item.id}</td>
-                                        <td className="cart_img"><img className="img" src={item.image} /></td>
-                                        <td>{item.allAmount}</td>
+                                        <td className="cart_img"><img className="img" src={item.image} /></td>             
                                         <td>{item.title}</td>
+                                        <td>{item.allAmount}</td>
                                         <td>${item.price}</td>
                                         <td>
                                             {item.amount}

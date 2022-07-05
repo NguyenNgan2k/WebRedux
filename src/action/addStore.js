@@ -1,4 +1,4 @@
-import { GET_LIST_POST, GET_LIST_POST_SUCCESS, ADD_STORE, DELETE_STORE,UPDATE_AMOUNT, SUB_AMOUNT } from "../constant";
+import { GET_LIST_POST, GET_LIST_POST_SUCCESS, ADD_STORE, DELETE_STORE,UPDATE_AMOUNT, SUB_AMOUNT, GET_LIST_POST_FAIL } from "../constant";
 export const getListPost = (payload) => {
     return {
         type: GET_LIST_POST,
@@ -9,6 +9,12 @@ export const getListPostSuccess = (payload) => {
     return {
         type: GET_LIST_POST_SUCCESS,
         payload,
+    };
+};
+export const getListPostFail = (error) => {
+    return {
+        type: GET_LIST_POST_FAIL,
+        error,
     };
 };
 export const add_store = (product) => {

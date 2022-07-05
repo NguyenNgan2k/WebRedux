@@ -23,6 +23,7 @@ export const reducer = (state = INITIAL_STATE, action) => {
                 posts: data,
                 load: false,
             };
+        
         case ADD_STORE:
             const { product } = action
             console.log(action)
