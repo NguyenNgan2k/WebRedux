@@ -4,3 +4,4 @@ export const GET_LIST_POST_FAIL = 'GET_LIST_POST_FAIL';
 export const ADD_STORE = 'ADD_STORE';
 export const DELETE_STORE = 'DELETE_STORE';
 export const UPDATE_AMOUNT = 'UPDATE_AMOUNT';
+export const SUB_AMOUNT = 'SUB_AMOUNT';

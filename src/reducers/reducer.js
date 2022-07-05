@@ -1,5 +1,7 @@
 import * as _ from "lodash";
-import { GET_LIST_POST, GET_LIST_POST_SUCCESS, ADD_STORE, DELETE_STORE, UPDATE_AMOUNT } from "../constant";
+import { assign } from "lodash";
+import { act } from "react-dom/test-utils";
+import { GET_LIST_POST, GET_LIST_POST_SUCCESS, ADD_STORE, DELETE_STORE, UPDATE_AMOUNT, SUB_AMOUNT } from "../constant";
 const INITIAL_STATE = {
     posts: [],
     load: false,
@@ -33,25 +35,45 @@ export const reducer = (state = INITIAL_STATE, action) => {
                         price: product.price,
                         image: product.images[1],
                         amount:product?.amount || 1,
+                        allAmount: product.allAmount - 1,
+                    
                     },
                     ...state.stores],
+                     posts: _.map(state.posts, o => o.id === product.id ? { ...o, allAmount: product.allAmount - 1} : o)
+                   
+                    
             };
 
         case DELETE_STORE:
+            const {item} = action
+            console.log(action)
             return {
                 ...state,
-                stores: _.remove(state.stores, o => o.id !== action.id)
+                posts: _.map(state.posts, o => o.id === item.id ? { ...o, allAmount: o.allAmount + item.amount} : o),
+                stores: _.remove(state.stores, o => o.id !== item.id) 
             };
 
         case UPDATE_AMOUNT:
             const { arrow } = action
-            console.log(arrow,action)
+            console.log(action)
             console.log (state.stores)
             return {
                 ...state,
-                stores: _.map(state.stores, o => o.id === arrow.id ? { ...o, amount: arrow.amount } : o)
+                stores: _.map(state.stores, o => o.id === arrow.id ? { ...o, amount: arrow.amount, allAmount: o.allAmount - 1} : o),
+                posts: _.map(state.posts, o => o.id === arrow.id ? { ...o, allAmount: o.allAmount - 1} : o)
                  
             }
+        
+            case SUB_AMOUNT:
+                const { arr } = action
+                console.log(action)
+                console.log (state.stores)
+                return {
+                    ...state,
+                    stores: _.map(state.stores, o => o.id === arr.id ? { ...o, amount: arr.amount, allAmount: o.allAmount + 1} : o),
+                    posts: _.map(state.posts, o => o.id === arr.id ? { ...o, allAmount: o.allAmount + 1} : o)
+                     
+                }
 
         default:
             return state;

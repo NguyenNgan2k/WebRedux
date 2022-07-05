@@ -1,18 +1,20 @@
 import axios from "axios";
 import {call, put, takeLatest} from 'redux-saga/effects'
 import { getListPostSuccess,getListPostFail } from "../action/addStore";
+
+function callApi() {
+    return axios.get('https://api.escuelajs.co/api/v1/products')
+}
+
 function* getListPostSaga(action) {
     try {
-        const data = yield call (async () => {
-            return await axios.get('https://api.escuelajs.co/api/v1/products');
-        });
-        let mockData = []
-        data.forEach(element => {
-            let _dt = Object.assign({}, element)
-            _dt.amount = Math.ceil(Math.random() * 10) + 1;
-            mockData.push(_dt)
-        });
-        yield put(getListPostSuccess(mockData));
+        const resData = yield call (callApi);        
+        resData.data.map(item => {
+            item.allAmount = Math.ceil(Math.random() * 100) + 1;
+            return item
+        })
+
+        yield put(getListPostSuccess(resData));
     } catch (error) {
         // yield put(getListPostFail(error));
     }

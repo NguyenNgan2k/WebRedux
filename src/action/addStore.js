@@ -1,4 +1,4 @@
-import { GET_LIST_POST, GET_LIST_POST_SUCCESS, ADD_STORE, DELETE_STORE,UPDATE_AMOUNT } from "../constant";
+import { GET_LIST_POST, GET_LIST_POST_SUCCESS, ADD_STORE, DELETE_STORE,UPDATE_AMOUNT, SUB_AMOUNT } from "../constant";
 export const getListPost = (payload) => {
     return {
         type: GET_LIST_POST,
@@ -17,15 +17,21 @@ export const add_store = (product) => {
         product
     }
 };
-export const delete_store = (id) => {
+export const delete_store = (item) => {
     return {
         type: DELETE_STORE,
-        id
+        item
     }
 };
 export const update_amount = (arrow) => {
     return {
         type: UPDATE_AMOUNT,
         arrow
+    }
+};
+export const sub_amount = (arr) => {
+    return {
+        type: SUB_AMOUNT,
+        arr
     }
 };

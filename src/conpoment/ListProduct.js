@@ -11,10 +11,11 @@ function ListProduct(props) {
         props.actions.getListPost();
     }, [])
     const { posts, load } = props;
-    const {stores} = props
+    const { stores } = props
     function handleClick(item) {
         const _filter = _.find(stores, o => o.id === item.id)
-        if(_filter){
+
+        if (_filter) {
             let arrow = Object.assign({}, _filter)
             arrow.amount = !_filter.amount ? 1 : (_filter.amount + 1);
             props.actions.update_amount(arrow)
@@ -22,28 +23,29 @@ function ListProduct(props) {
             let arrow = Object.assign({}, item)
             props.actions.add_store(arrow)
         }
-        console.log(stores)
     }
     return (
         <div className="container product">
             <div className="header">
                 <h2 className="name_list">LIST PRODUCT </h2>
-                <Link to='/store' className="store"><FaShoppingCart/><span>({stores?.length})</span></Link>
+                <Link to='/store' className="store"><FaShoppingCart /><span>({stores?.length})</span></Link>
             </div>
             {
                 load ? <h2 className="name_list">Data is loading from API...</h2> :
-                <div className="product_list">
-                {posts && posts.map((item) => {
-                    return (
-                        <div className="product_item" key={item.id}>
-                            <img className="img" src={item.images[0]} />
-                            <div className="title">{item.title}</div>
-                            <div className="price">${item.price}</div>
-                            <button className="app-store" onClick={() => handleClick(item)}>Add to card</button>
-                        </div>
-                    )
-                })}
-            </div>
+                    <div className="product_list">
+                        {posts && posts.map((item) => {
+                            if (item.allAmount < 1) return null;
+                            return (
+                                <div className="product_item" key={item.id}>
+                                    <img className="img" src={item.images[0]} />
+                                    <div className="title">{item.title}</div>
+                                    <div className="price">${item.price}</div>
+                                    <div className="price">amount: {item.allAmount}</div>
+                                    <button className="app-store" onClick={() => handleClick(item)}>Add to card</button>
+                                </div>
+                            )
+                        })}
+                    </div>
             }
 
         </div>

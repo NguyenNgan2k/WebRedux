@@ -6,22 +6,28 @@ import _ from 'lodash';
 import { FaTrash } from 'react-icons/fa';
 function Store(props) {
     const { stores } = props;
-    const handleOnclickDelete = (id) => {
-        props.actions.delete_store(id)
+    const handleOnclickDelete = (item) => {
+        props.actions.delete_store(item)
     }
     const handleClickAdd = (item) => {
         let arrow = Object.assign({}, item)
-        arrow.amount = item.amount + 1
+        if (arrow.allAmount === 0) {
+            alert("Product = 0")
+        } else {
+            arrow.amount = item.amount + 1
         props.actions.update_amount(arrow)
+
+        }
+         
     }
     const handleClickSub = (item) => {
         let arrow = Object.assign({}, item)
         if( arrow.amount - 1 >0) {
             arrow.amount = item.amount - 1
-            props.actions.update_amount(arrow)
+            props.actions.sub_amount(arrow)
         } else {
             if(window.confirm("Bạn muốn xóa sản phẩm này")){
-                props.actions.delete_store(arrow.id)
+                props.actions.delete_store(item)
             }        
         }
         
@@ -39,6 +45,7 @@ function Store(props) {
                             <td>ID</td>
                             <td>Product</td>
                             <td></td>
+                            <td>All Amount</td>
                             <td>Price</td>
                             <td>Number</td>
                             <td>Action</td>
@@ -52,13 +59,14 @@ function Store(props) {
                                     <tr key={index}>
                                         <td>{item.id}</td>
                                         <td className="cart_img"><img className="img" src={item.image} /></td>
+                                        <td>{item.allAmount}</td>
                                         <td>{item.title}</td>
                                         <td>${item.price}</td>
                                         <td>
                                             {item.amount}
                                             <button className="bnt_slg" onClick={() => handleClickAdd(item)}> + </button>
                                             <button className="bnt_slg" onClick={() => handleClickSub(item)}> - </button></td>
-                                        <td><button className="bnt_slg"  onClick={() => handleOnclickDelete(item.id)}><FaTrash/></button></td>
+                                        <td><button className="bnt_slg"  onClick={() => handleOnclickDelete(item)}><FaTrash/></button></td>
                                         <td>${item.price * item.amount}</td>
                                     </tr>
                                 )
