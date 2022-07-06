@@ -4,6 +4,7 @@ import ListProduct from './conpoment/ListProduct';
 import Store from './conpoment/Store';
 import Admin from './conpoment/Admin';
 import ModalAddNew from './conpoment/ModalAddNew';
+import ModalEdit from './conpoment/ModalEdit';
 import React from "react";
 import {
   BrowserRouter as Router,
@@ -26,6 +27,9 @@ function App() {
         </Route>
         <Route path="/addnew">
           <ModalAddNew />
+        </Route>
+        <Route path="/editdata">
+          <ModalEdit />
         </Route>
       </Switch>
     </Router>

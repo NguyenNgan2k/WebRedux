@@ -145,4 +145,12 @@ tbody {
 }
 .form-label{
   font-weight: 500;
+  margin-left: 15px
+}
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+}
+.btn {
+  margin-left: 15px
 }

@@ -13,6 +13,12 @@ function Admin(props) {
     useEffect(() => {
         props.actions.getListPost();
     }, [])
+    const handleClickEdit = (id) => {
+        props.actions.get_info(id)
+    }
+    const handleClickDelete = (id) => {
+        props.actions.delete_product(id)
+    }
     const { posts } = props
     return (
         <div className="container">
@@ -42,7 +48,10 @@ function Admin(props) {
                                         <td>{item.title}</td>
                                         <td>{item.allAmount}</td>
                                         <td>${item.price}</td>
-                                        <td><FaEdit /> <FaTrash /></td>
+                                        <td>
+                                            <Link  to="/editdata" style={{color: '#000'}} onClick = {() => handleClickEdit(item.id)} > <FaEdit /> </Link>
+                                        <FaTrash onClick={() => handleClickDelete(item.id)}/>
+                                        </td>
                                     </tr>
                                 )
                             })
@@ -61,6 +70,7 @@ const mapStateToProps = state => {
     console.log(state)
     return {
         posts: state.reducer.posts,
+       
     };
 }
 const mapDispatchToProps = (dispatch) => {

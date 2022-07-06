@@ -5,3 +5,7 @@ export const ADD_STORE = 'ADD_STORE';
 export const DELETE_STORE = 'DELETE_STORE';
 export const UPDATE_AMOUNT = 'UPDATE_AMOUNT';
 export const SUB_AMOUNT = 'SUB_AMOUNT';
+export const ADD_POST = 'ADD_POST';
+export const GET_INFO = 'GET_INFO';
+export const EDIT_INFO = 'EDIT_INFO';
+export const DELETE_PRODUCT = 'DELETE_PRODUCT';

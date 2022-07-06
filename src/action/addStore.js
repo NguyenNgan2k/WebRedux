@@ -1,4 +1,5 @@
-import { GET_LIST_POST, GET_LIST_POST_SUCCESS, ADD_STORE, DELETE_STORE,UPDATE_AMOUNT, SUB_AMOUNT, GET_LIST_POST_FAIL } from "../constant";
+import { values } from "lodash";
+import { GET_LIST_POST, GET_LIST_POST_SUCCESS, ADD_STORE, DELETE_STORE,UPDATE_AMOUNT, SUB_AMOUNT, GET_LIST_POST_FAIL,ADD_POST, GET_INFO, EDIT_INFO, DELETE_PRODUCT} from "../constant";
 export const getListPost = (payload) => {
     return {
         type: GET_LIST_POST,
@@ -41,3 +42,28 @@ export const sub_amount = (arr) => {
         arr
     }
 };
+export const add_post = (pro) => {
+    return {
+        type: ADD_POST,
+        pro
+    }
+
+}
+export const get_info = (id) => {
+    return {
+        type: GET_INFO,
+        id
+    }
+}
+export const edit_info = (obj) => {
+    return {
+        type: EDIT_INFO,
+        obj
+    }
+}
+export const delete_product = (dele) => {
+    return {
+        type: DELETE_PRODUCT,
+        dele
+    }
+}
