@@ -88,7 +88,7 @@ export const reducer = (state = INITIAL_STATE, action) => {
                         title: pro.title,
                         price: pro.price,
                         images: [
-                            pro.image
+                            pro.image?.name || null
                         ],
                         allAmount: pro.allAmount,
 
@@ -109,7 +109,7 @@ export const reducer = (state = INITIAL_STATE, action) => {
             console.log(action)
             return {
                 ...state,
-                posts: _.map(state.posts, o => o.id === obj.id ? {...o,images: [obj.image], title: obj.title, price: obj.price, allAmount: obj.amount} : o),
+                posts: _.map(state.posts, o => o.id === obj.id ? {...o,images: [obj.image.name], title: obj.title, price: obj.price, allAmount: obj.amount} : o),
                 info: null
                 
             }

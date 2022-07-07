@@ -7,10 +7,12 @@ import * as todoAction from '../action/addStore';
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import _ from 'lodash';
-import { TiArrowBackOutline } from 'react-icons/ti'
+import { TiArrowBackOutline,TiDeleteOutline } from 'react-icons/ti'
+import { useRef } from 'react';
 import { useDispatch } from 'react-redux';
 
 const required = value => value ? undefined : 'Required'
+const upper = value => value.toUpperCase()
 
 const number = value => value && !/[0-9]/i.test(parseInt(value)) ? 'Only numeric characters' : undefined
 
@@ -31,11 +33,35 @@ const renderField = ({
   </div>
 )
 
+const renderUploadFile = (props) => {
+  console.log(props)
+  const onChange= (e) => {
+      const { input: { onChange } } = props
+      
+      onChange(e.target.files[0])
+      console.log(e)
+    }
+
+  return(
+  <div>
+     <div>
+     <input
+      type='file'
+      accept='.jpg, .png, .jpeg'
+      onChange={onChange}
+      className="input_file"
+     />
+   </div>
+  </div>
+  );
+}
+
 function ModalAddNew(props) {
   console.log(props)
   const dispatch = useDispatch()
   const { push } = useHistory()
   const { info, posts, pristine  } = props
+  
 
   useEffect(() => {
     if (info) {
@@ -49,16 +75,11 @@ function ModalAddNew(props) {
   }, [info])
 
   const submit = (values) => {
-    const _find = _.find(posts, o => o.id === values.id)
-    if (_find) {
+    
       props.actions.edit_info(values);
       // //success => router to admin
-      push('/admin')
-    } else {
-      alert("Product does not exist")
-    }
-
-  }
+      // push('/admin')
+    } 
 
   const { handleSubmit, submitting } = props
   return (
@@ -72,21 +93,21 @@ function ModalAddNew(props) {
           <label className="form-label">ID</label>
           <Field className="form-control" name="id" type="text"
             component={renderField}
-            disabled={true}
           />
         </div>
         <div className="col-md-12">
           <label className="form-label">Image</label>
           <Field className="form-control" name="image" type="text"
-            component={renderField}
-            validate={required}
+            component={renderUploadFile}
           />
+          
         </div>
         <div className="col-md-12">
           <label className="form-label">Title</label>
           <Field className="form-control" name="title" type="text"
             component={renderField}
             validate={required}
+            normalize={upper}
           />
         </div>
         <div className="col-md-12">

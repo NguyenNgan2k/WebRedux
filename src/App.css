@@ -1,20 +1,23 @@
-
 .App {
   text-align: center;
 }
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
 }
+
 /* css list product */
 body {
-  background:#121f3d;
-   
+  background: #121f3d;
+
 }
+
 .header {
   display: flex;
   position: relative;
@@ -23,7 +26,7 @@ body {
   align-items: center;
 }
 
-.store{
+.store {
   position: absolute;
   right: 0;
   color: #fff;
@@ -31,72 +34,87 @@ body {
   padding: 10px;
   border-radius: 0.5rem;
 }
+
 .product_list {
   margin-top: 50px;
-  display: grid;  
+  display: grid;
   grid-template-columns: auto auto auto auto;
   text-align: center;
 }
+
 .product_item {
   margin: 12px;
   padding: 15px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
 .app-store {
-  color: rgb(7, 34, 110);;
+  color: rgb(7, 34, 110);
+  ;
   font-weight: bold;
   padding: 5px;
 }
 
 td {
-    padding: 20px 40px;
-    font-size: 20px;
-    text-align: center;
- }
+  padding: 20px 40px;
+  font-size: 20px;
+  text-align: center;
+}
+
 .title_store {
   margin: 50px 0;
 }
+
 .bnt_slg {
   border: 0px solid #fff !important;
   padding: 0px 8px;
   margin: 2px;
- 
+
 }
+
 table {
   width: 100%;
   background-color: #fff;
   margin-top: 50px;
 }
+
 .img {
   width: 100%;
   z-index: 1;
 }
+
 .name_list {
   color: #fff !important;
 }
-.title{
+
+.title {
   color: #fff !important;
   font-weight: bold;
   text-overflow: ellipsis;
   margin: 10px 0;
 }
+
 .price {
   margin: 10px 0;
   color: rgb(175, 170, 170);
 }
+
 thead {
   font-weight: bold;
   background-color: #dee2e6;
 }
+
 .total_cart {
   color: #fff;
 
 }
+
 tbody {
   color: #3a3a3a;
 }
+
 .cart_img {
- padding: 10px;
+  padding: 10px;
 }
 
 .amount {
@@ -105,12 +123,13 @@ tbody {
   right: -5px;
   width: 20px;
   height: 20px;
- font-size: 12px;
- border-radius: 50%;
- text-align: center;
- background-color: rgb(238, 174, 211);
- 
+  font-size: 12px;
+  border-radius: 50%;
+  text-align: center;
+  background-color: rgb(238, 174, 211);
+
 }
+
 /* admin-----------------*/
 .admin {
   position: absolute;
@@ -120,10 +139,12 @@ tbody {
   padding: 10px;
   border-radius: 0.5rem;
 }
+
 .title_add {
   font-weight: bold;
   margin-top: 20px;
 }
+
 .add_new {
   color: #fff;
   position: absolute;
@@ -133,6 +154,7 @@ tbody {
   padding: 8px 25px;
   border-radius: 1rem 1rem;
 }
+
 .admin_img {
   width: 50%;
   height: 100%;
@@ -143,14 +165,46 @@ tbody {
   padding: 20px 40px;
   margin-top: 50px;
 }
-.form-label{
+
+.form-label {
   font-weight: 500;
   margin-left: 15px
 }
+
 input[type="text"] {
   width: 100%;
   padding: 10px;
 }
+
 .btn {
   margin-left: 15px
 }
+
+.input_file {
+  padding: 0px 15px
+}
+
+/* .myfileupload-buttonbar input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  opacity: 0.0;
+  filter: alpha(opacity=0);
+  direction: ltr;
+  cursor: pointer;
+
+}
+
+.myui-button {
+  margin: 0 15px;
+  position: relative;
+  cursor: pointer;
+  text-align: center;
+  overflow: visible;
+  overflow: hidden;
+  background-color: #0d6efd;
+  padding: 10px;
+  color: #fff;
+  border-radius: 0.2rem;
+} */
