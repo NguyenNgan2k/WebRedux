@@ -127,11 +127,11 @@ function ModalAddNew(props) {
 
 
                 <div className="col-1">
-                    <button type="submit" className="btn btn-primary" >ADD</button>
+                    <Link to = "/bill"> <button type="submit" className="btn btn-primary" >ADD</button></Link>
                 </div>
-                {/* <div className="col-1">
+                <div className="col-1">
                     <button type="submit" className="btn btn-primary" onClick={reset}>Clear</button>
-                </div> */}
+                </div>
             </form>
         </div>
 

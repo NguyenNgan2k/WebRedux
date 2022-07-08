@@ -53,7 +53,8 @@ export const reducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 posts: _.map(state.posts, o => o.id === item.id ? { ...o, allAmount: o.allAmount + item.amount } : o),
-                stores: _.remove(state.stores, o => o.id !== item.id)
+                stores: _.remove(state.stores, o => o.id !== item.id),
+                payments: _.remove(state.payments, o => o.id !== item.id)
             };
 
         case UPDATE_AMOUNT:

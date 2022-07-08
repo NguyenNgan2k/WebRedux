@@ -5,7 +5,8 @@ import Store from './conpoment/Store';
 import Admin from './conpoment/Admin';
 import ModalAddNew from './conpoment/ModalAddNew';
 import ModalEdit from './conpoment/ModalEdit';
-import Payment from './conpoment/Payment'
+import Payment from './conpoment/Payment';
+import Bill from './conpoment/Bill';
 import React from "react";
 import {
   BrowserRouter as Router,
@@ -34,6 +35,9 @@ function App() {
         </Route>
         <Route path="/pay">
           <Payment/>
+        </Route>
+        <Route path="/bill">
+          <Bill/>
         </Route>
       </Switch>
     </Router>

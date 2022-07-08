@@ -39,7 +39,7 @@ body {
   margin-top: 50px;
   display: grid;
   grid-template-columns: auto auto auto auto;
-  /* text-align: center; */
+  text-align: center;
 }
 
 .product_item {
@@ -264,4 +264,9 @@ h5 {
 }
 .form_user .col-md-12 {
   padding: 0px  !important
+}
+.user .btn-primary {
+  width: 100% ;
+  margin: 0;
+  font-weight: bold;
 }

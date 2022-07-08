@@ -1,15 +1,18 @@
 import { bindActionCreators } from 'redux';
 import * as todoAction from '../action/addStore';
 import { connect } from 'react-redux';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import _ from 'lodash';
 import { FaTrash } from 'react-icons/fa';
 import { BsCheck2Square } from 'react-icons/bs';
-import { Button } from 'bootstrap';
-function Store(props) {
+import { useState } from 'react';
 
+function Store(props) {
+     
+    const [state, setState] = useState(false)
     const { stores, payments } = props;
     const handleOnclickDelete = (item) => {
+
         props.actions.delete_store(item)
     }
     const handleClickAdd = (item) => {
@@ -18,43 +21,46 @@ function Store(props) {
             alert("Product = 0")
         } else {
             arrow.amount = item.amount + 1
-        props.actions.update_amount(arrow)
+            props.actions.update_amount(arrow)
 
         }
-         
+
     }
     const handleClickSub = (item) => {
         let arrow = Object.assign({}, item)
-        if( arrow.amount - 1 >0) {
+        if (arrow.amount - 1 > 0) {
             arrow.amount = item.amount - 1
             props.actions.sub_amount(arrow)
         } else {
-            if(window.confirm("Bạn muốn xóa sản phẩm này")){
+            if (window.confirm("Bạn muốn xóa sản phẩm này")) {
                 props.actions.delete_store(item)
-            }        
+            }
         }
-        
+
     }
-    const handleClickCheckBox = (item)  => {
+    const handleClickCheckBox = (item) => {
         const _find = _.find(payments, o => o.id === item.id)
-        if(_find) {
-           props.actions.delete_payment(item)
+        if (_find) {
+            props.actions.delete_payment(item)
         } else {
             props.actions.add_payment(item)
         }
-        
+
+    }
+    const handleClear = () =>{
+        props.actions.clear_payment()
     }
     return (
         <div className="container ">
             <div className="header">
                 <h2 className='name_list'>Cart</h2>
-                <Link to = '/' className="store">Shopping</Link>
+                <Link to='/' className="store" onClick={handleClear}>Shopping</Link>
             </div>
             <div className="pro_table">
                 <table>
                     <thead>
                         <tr>
-                            <td><BsCheck2Square/></td>
+                            <td><BsCheck2Square /></td>
                             <td>Product</td>
                             <td></td>
                             <td>Amount</td>
@@ -69,8 +75,15 @@ function Store(props) {
                             stores.map((item, index) => {
                                 return (
                                     <tr key={index}>
-                                        <td><input type="checkbox" name={item.id} onChange={() =>handleClickCheckBox(item)}/></td>
-                                        <td className="cart_img"><img className="img" src={item.image} /></td>             
+                                        {/* {state === false ? <td onClick={handleOnclickCheck}><GrCheckbox/></td> :  <td  onClick={handleOnclickCheck}><BsCheck2Square/></td> } */}
+                                        <td>
+                                            <input type="checkbox" 
+                                                name={item.id} 
+                                                onChange={() => handleClickCheckBox(item)} 
+                                                checked={_.some(payments, o => o.id === item.id)}
+                                                />
+                                        </td>
+                                        <td className="cart_img"><img className="img" src={item.image} /></td>
                                         <td>{item.title}</td>
                                         <td>{item.allAmount}</td>
                                         <td>${item.price}</td>
@@ -78,7 +91,7 @@ function Store(props) {
                                             {item.amount}
                                             <button className="bnt_slg" onClick={() => handleClickAdd(item)}> + </button>
                                             <button className="bnt_slg" onClick={() => handleClickSub(item)}> - </button></td>
-                                        <td><button className="bnt_slg"  onClick={() => handleOnclickDelete(item)}><FaTrash/></button></td>
+                                        <td><button className="bnt_slg" onClick={() => handleOnclickDelete(item)}><FaTrash /></button></td>
                                         <td>${item.price * item.amount}</td>
                                     </tr>
                                 )
@@ -88,11 +101,11 @@ function Store(props) {
                     </tbody>
                 </table>
             </div>
-            <br/>
+            <br />
             <div className="payment">
-                    Cart Total({payments.length} product):
-                    <span className="total_cart">${_.reduce(payments, (sum, o) => sum +  o.amount * o.price, 0) }</span> 
-                    <Link  className="pay" to="/pay"><button  className="text" >Payment</button></Link>
+                Cart Total ({payments.length} product):
+                <span className="total_cart">${_.reduce(payments, (sum, o) => sum + o.amount * o.price, 0)}</span>
+                <button className="text" >Payment</button>
             </div>
         </div>
     );
