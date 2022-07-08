@@ -5,10 +5,9 @@ import { Link } from 'react-router-dom'
 import _ from 'lodash';
 import { FaTrash } from 'react-icons/fa';
 import { BsCheck2Square } from 'react-icons/bs';
-import { useState } from 'react';
-
+ 
+import { useState } from 'react'
 function Store(props) {
-     
     const [state, setState] = useState(false)
     const { stores, payments } = props;
     const handleOnclickDelete = (item) => {
@@ -105,7 +104,7 @@ function Store(props) {
             <div className="payment">
                 Cart Total ({payments.length} product):
                 <span className="total_cart">${_.reduce(payments, (sum, o) => sum + o.amount * o.price, 0)}</span>
-                <button className="text" >Payment</button>
+                <Link className="pay" to="/pay"><button className="text" >Payment</button></Link>
             </div>
         </div>
     );
