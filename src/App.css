@@ -39,7 +39,7 @@ body {
   margin-top: 50px;
   display: grid;
   grid-template-columns: auto auto auto auto;
-  text-align: center;
+  /* text-align: center; */
 }
 
 .product_item {
@@ -58,7 +58,6 @@ body {
 td {
   padding: 20px 40px;
   font-size: 20px;
-  text-align: center;
 }
 
 .title_store {
@@ -80,7 +79,6 @@ table {
 
 .img {
   width: 100%;
-  z-index: 1;
 }
 
 .name_list {
@@ -105,8 +103,9 @@ thead {
 }
 
 .total_cart {
-  color: #fff;
-
+  color:  rgb(7, 34, 110);
+  font-weight: bold;
+  margin-left: 20px;
 }
 
 tbody {
@@ -184,7 +183,7 @@ input[type="text"] {
   padding: 0px 15px
 }
 
-/* .myfileupload-buttonbar input {
+.myfileupload-buttonbar input {
   position: absolute;
   top: 0;
   right: 0;
@@ -207,4 +206,62 @@ input[type="text"] {
   padding: 10px;
   color: #fff;
   border-radius: 0.2rem;
-} */
+}
+.show_name {
+  margin: 15px;
+}
+/* cart */
+.payment {
+  background-color: #fff;
+  padding: 25px;
+  margin-top: 20px;
+  position: relative;
+}
+.pay {
+  position: absolute;
+  right: 20px;
+  top: 13px;
+}
+.text {
+  padding: 10px;
+  background-color: rgb(7, 34, 110) ;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 0.2rem;
+}
+h5 {
+  margin: 0;
+}
+/* pay ment */
+.order {
+  color:#fff ;
+}
+
+.info {
+  display: flex;
+  margin: 50px 0;
+}
+.info_container{
+  width: 50%;
+  font-weight: bold;
+  
+}
+.info_user {
+  padding: 20px;
+}
+.info_order {
+  /* border: 2px solid #e25f08; */
+  padding: 20px
+}
+.form_user{
+  margin-top: 50px;
+}
+.user {
+  margin-top:  20px;
+}
+.table_order {
+  font-weight: 500;
+}
+.form_user .col-md-12 {
+  padding: 0px  !important
+}

@@ -4,9 +4,11 @@ import { connect } from 'react-redux';
 import {Link} from 'react-router-dom'
 import _ from 'lodash';
 import { FaTrash } from 'react-icons/fa';
- 
+import { BsCheck2Square } from 'react-icons/bs';
+import { Button } from 'bootstrap';
 function Store(props) {
-    const { stores } = props;
+
+    const { stores, payments } = props;
     const handleOnclickDelete = (item) => {
         props.actions.delete_store(item)
     }
@@ -33,6 +35,15 @@ function Store(props) {
         }
         
     }
+    const handleClickCheckBox = (item)  => {
+        const _find = _.find(payments, o => o.id === item.id)
+        if(_find) {
+           props.actions.delete_payment(item)
+        } else {
+            props.actions.add_payment(item)
+        }
+        
+    }
     return (
         <div className="container ">
             <div className="header">
@@ -43,7 +54,7 @@ function Store(props) {
                 <table>
                     <thead>
                         <tr>
-                            <td>ID</td>
+                            <td><BsCheck2Square/></td>
                             <td>Product</td>
                             <td></td>
                             <td>Amount</td>
@@ -58,7 +69,7 @@ function Store(props) {
                             stores.map((item, index) => {
                                 return (
                                     <tr key={index}>
-                                        <td>{item.id}</td>
+                                        <td><input type="checkbox" name={item.id} onChange={() =>handleClickCheckBox(item)}/></td>
                                         <td className="cart_img"><img className="img" src={item.image} /></td>             
                                         <td>{item.title}</td>
                                         <td>{item.allAmount}</td>
@@ -79,7 +90,9 @@ function Store(props) {
             </div>
             <br/>
             <div className="payment">
-                <h5 className="total_cart">Cart Total: ${_.reduce(stores, (sum, o) => sum +  o.amount * o.price, 0) }</h5>
+                    Cart Total({payments.length} product):
+                    <span className="total_cart">${_.reduce(payments, (sum, o) => sum +  o.amount * o.price, 0) }</span> 
+                    <Link  className="pay" to="/pay"><button  className="text" >Payment</button></Link>
             </div>
         </div>
     );
@@ -87,7 +100,8 @@ function Store(props) {
 const mapStateToProps = state => {
     console.log(state)
     return {
-        stores: state.reducer.stores
+        stores: state.reducer.stores,
+        payments: state.reducer.payments
     };
 }
 const mapDispatchToProps = (dispatch) => {

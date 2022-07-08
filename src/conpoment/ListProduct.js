@@ -2,8 +2,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as todoAction from '../action/addStore';
 import { Link } from "react-router-dom";
-import { FaShoppingCart } from 'react-icons/fa';
-import { FaHouseDamage} from 'react-icons/fa';
+import { FaShoppingCart,FaHouseDamage } from 'react-icons/fa';
 import * as _ from 'lodash';
 import { useEffect } from "react";
 

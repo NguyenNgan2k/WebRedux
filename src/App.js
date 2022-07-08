@@ -5,6 +5,7 @@ import Store from './conpoment/Store';
 import Admin from './conpoment/Admin';
 import ModalAddNew from './conpoment/ModalAddNew';
 import ModalEdit from './conpoment/ModalEdit';
+import Payment from './conpoment/Payment'
 import React from "react";
 import {
   BrowserRouter as Router,
@@ -30,6 +31,9 @@ function App() {
         </Route>
         <Route path="/editdata">
           <ModalEdit />
+        </Route>
+        <Route path="/pay">
+          <Payment/>
         </Route>
       </Switch>
     </Router>

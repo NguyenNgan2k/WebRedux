@@ -1,12 +1,13 @@
 import * as _ from "lodash";
 import { assign } from "lodash";
 import { act } from "react-dom/test-utils";
-import { GET_LIST_POST, GET_LIST_POST_SUCCESS, ADD_STORE, DELETE_STORE, UPDATE_AMOUNT, SUB_AMOUNT, ADD_POST, GET_INFO, EDIT_INFO, DELETE_PRODUCT } from "../constant";
+import { GET_LIST_POST, GET_LIST_POST_SUCCESS, ADD_STORE, DELETE_STORE, UPDATE_AMOUNT, SUB_AMOUNT, ADD_POST, GET_INFO, EDIT_INFO, DELETE_PRODUCT, ADD_PAYMENT, DELETE_PAYMENT, CLEAR_PAYMENT, UPDATE_PAYMENT } from "../constant";
 const INITIAL_STATE = {
     posts: [],
     load: false,
     stores: [],
-    info: null
+    info: null,
+    payments: []
 };
 
 export const reducer = (state = INITIAL_STATE, action) => {
@@ -62,7 +63,8 @@ export const reducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 stores: _.map(state.stores, o => o.id === arrow.id ? { ...o, amount: arrow.amount, allAmount: o.allAmount - 1 } : o),
-                posts: _.map(state.posts, o => o.id === arrow.id ? { ...o, allAmount: o.allAmount - 1 } : o)
+                posts: _.map(state.posts, o => o.id === arrow.id ? { ...o, allAmount: o.allAmount - 1 } : o),
+                payments: _.map(state.payments, o => o.id === arrow.id ? { ...o, amount: arrow.amount} : o)
 
             }
 
@@ -73,12 +75,13 @@ export const reducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 stores: _.map(state.stores, o => o.id === arr.id ? { ...o, amount: arr.amount, allAmount: o.allAmount + 1 } : o),
-                posts: _.map(state.posts, o => o.id === arr.id ? { ...o, allAmount: o.allAmount + 1 } : o)
+                posts: _.map(state.posts, o => o.id === arr.id ? { ...o, allAmount: o.allAmount + 1 } : o),
+                payments: _.map(state.payments, o => o.id === arr.id ? { ...o, amount: arr.amount} : o)
 
             }
 
-        case ADD_POST: 
-            const { pro} = action
+        case ADD_POST:
+            const { pro } = action
             console.log(action)
             return {
                 ...state,
@@ -97,31 +100,64 @@ export const reducer = (state = INITIAL_STATE, action) => {
             }
 
         case GET_INFO:
-            const {id} = action
+            const { id } = action
             console.log(action)
             return {
                 ...state,
                 info: _.find(state.posts, o => o.id === id)
             }
-        
+
         case EDIT_INFO:
-            const {obj} = action
+            const { obj } = action
             console.log(action)
             return {
                 ...state,
-                posts: _.map(state.posts, o => o.id === obj.id ? {...o,images: [obj.image.name], title: obj.title, price: obj.price, allAmount: obj.amount} : o),
+                posts: _.map(state.posts, o => o.id === obj.id ? { ...o, images: [obj.image.name], title: obj.title, price: obj.price, allAmount: obj.amount } : o),
                 info: null
-                
+
             }
 
         case DELETE_PRODUCT:
-            const {dele} = action
+            const { dele } = action
             console.log(action)
             return {
                 ...state,
-                posts: _.remove(state.posts,o => o.id !== dele)
+                posts: _.remove(state.posts, o => o.id !== dele)
             }
 
+        case ADD_PAYMENT:
+            const { check } = action
+            console.log(action)
+            return {
+                ...state,
+                payments: [
+                    {
+                        id: check.id,
+                        title: check.title,
+                        price: check.price,
+                        image: check.image,
+                        amount: check.amount,
+                    },
+                    ...state.payments
+                ]
+            }
+
+        case DELETE_PAYMENT:
+            const { pay } = action
+            console.log(action)
+            return {
+                ...state,
+                payments: _.remove(state.payments, o => o.id !== pay.id)
+            }
+        
+        case CLEAR_PAYMENT:
+            console.log(action)
+            return {
+                ...state,
+                payments: []
+            }
+        
+       
         default:
             return state;
     }

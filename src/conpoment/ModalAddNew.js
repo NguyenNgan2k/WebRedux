@@ -1,13 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import { Field, reduxForm } from 'redux-form'
+import { change,Field, reduxForm } from 'redux-form'
 import { bindActionCreators } from "redux";
 import * as todoAction from '../action/addStore';
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import _, { rest, upperCase } from 'lodash';
-import { TiArrowBackOutline, TiDeleteOutline } from 'react-icons/ti'
-const required = value => value ? undefined : 'Required'
+import { TiArrowBackOutline, TiDeleteOutline } from 'react-icons/ti';
+import { useDispatch } from 'react-redux';
+function required(value) {
+    return value ? undefined : 'Required';
+}
 // const number = value => value.toUppherCase()
 const renderField = ({
     input,
@@ -26,60 +29,28 @@ const renderField = ({
     </div>
 )
 
-// const renderUploadFile = (props) => {
-//     console.log(props)
-//     const { input } = props   
-//     const onChange= (e) => {
-
-//         input.onChange(e.target.files[0])
-//       }
-
-//       const onClick= (e) => {
-//         input.onChange(null)
-//       }
-
-//     return(
-//     <div>
-//        <div>
-//        <input
-//         type='file'
-//         accept='.jpg, .png, .jpeg'
-//         onChange={onChange}
-//         className="input_file"
-//        />
-//        <TiDeleteOutline  onClick={onClick}/>
-//      </div>
-//     </div>
-//     );
-// }
 const renderUploadFile = (props) => {
-    console.log(props)
-    const { input } = props   
+    
+    const { input} = props   
     const onChange= (e) => {
-        console.log(e)
         input.onChange(e.target.files[0])
       }
-
-      const onClick= (e) => {
-        input.onChange(null)
-      }
-
     return(
-         
         <div className="myfileupload-buttonbar ">
-          
+             
         <label className="myui-button">
             <span>Add Files</span>
             <input id="file" type="file" name="files[]" onChange={onChange}  />
-             
+            <span></span>
         </label>
+         
     </div>
     );
 }
 
 
 function ModalAddNew(props) {
-
+    const [state, setState] = useState("Không có tệp nào")
     const { posts, reset } = props
     const submit = (values) => {
       
@@ -93,7 +64,18 @@ function ModalAddNew(props) {
         }
 
     }
-    {console.log("props", props)}
+    const onChange = (values) => {
+        if (values) {
+            setState(values.name)
+        } else {
+            setState("Không có tệp nào")
+        }
+    }
+    const onClickDelete= (values) =>{
+        setState("Không có tệp nào")
+        props.change('image', undefined);
+    }
+  
     const { handleSubmit } = props
     return (
         <div className="container add">
@@ -113,8 +95,10 @@ function ModalAddNew(props) {
                     <label className="form-label">Image</label>
                     <Field className="form-control" name="image" type="file"
                         component={renderUploadFile}
+                        onChange={onChange}
                     />
-                    <span></span>
+                    <div className="show_name">{state} <span><TiDeleteOutline onClick={onClickDelete}/></span></div>
+                     
                 </div>
                 <div className="col-md-12">
                     <label className="form-label">Title</label>
@@ -153,7 +137,7 @@ function ModalAddNew(props) {
 
     );
 }
-const formed = reduxForm({
+const addNew = reduxForm({
     form: 'AddNewData'
 })(ModalAddNew);
 
@@ -169,4 +153,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(formed);
+export default connect(mapStateToProps, mapDispatchToProps)(addNew);
