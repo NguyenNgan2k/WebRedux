@@ -1,5 +1,5 @@
 import { values } from "lodash";
-import { GET_LIST_POST, GET_LIST_POST_SUCCESS, ADD_STORE, DELETE_STORE,UPDATE_AMOUNT, SUB_AMOUNT, GET_LIST_POST_FAIL,ADD_POST, GET_INFO, EDIT_INFO, DELETE_PRODUCT,ADD_PAYMENT, DELETE_PAYMENT, CLEAR_PAYMENT, UPDATE_PAYMENT} from "../constant";
+import { GET_LIST_POST, GET_LIST_POST_SUCCESS, ADD_STORE, DELETE_STORE,UPDATE_AMOUNT, SUB_AMOUNT, GET_LIST_POST_FAIL,ADD_POST, GET_INFO, EDIT_INFO, DELETE_PRODUCT,ADD_PAYMENT, DELETE_PAYMENT, CLEAR_PAYMENT, UPDATE_PAYMENT,ADD_BILL} from "../constant";
 export const getListPost = (payload) => {
     return {
         type: GET_LIST_POST,
@@ -85,5 +85,12 @@ export const delete_payment = (pay) => {
 export const clear_payment = () => {
     return {
         type: CLEAR_PAYMENT    
+    }
+}
+
+export const add_bill = (billInfor) => {
+    return {
+        type: ADD_BILL,
+        billInfor 
     }
 }

@@ -1,5 +1,5 @@
 
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { change, Field, reduxForm } from 'redux-form'
 import { bindActionCreators } from "redux";
@@ -7,14 +7,14 @@ import * as todoAction from '../action/addStore';
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import _ from 'lodash';
-import { TiArrowBackOutline,TiDeleteOutline } from 'react-icons/ti'
+import { TiArrowBackOutline, TiDeleteOutline } from 'react-icons/ti'
 import { useRef } from 'react';
 import { useDispatch } from 'react-redux';
 
 const required = value => value ? undefined : 'Required'
 const upper = value => value.toUpperCase()
 
-const number = value => value && !/[0-9]/i.test(parseInt(value)) ? 'Only numeric characters' : undefined
+const number = value => value && !/^\d+$/i.test(value) ? 'Only numeric characters' : undefined
 
 const renderField = ({
   input,
@@ -34,40 +34,38 @@ const renderField = ({
 )
 
 const renderUploadFile = (props) => {
-  console.log(props)
-  const onChange= (e) => {
-      const { input: { onChange } } = props
-      
-      onChange(e.target.files[0])
-      console.log(e)
-    }
 
-  return(
-  <div>
-     <div>
-     <input
-      type='file'
-      accept='.jpg, .png, .jpeg'
-      onChange={onChange}
-      className="input_file"
-     />
-   </div>
-  </div>
+  const { input } = props
+  const onChange = (e) => {
+    input.onChange(e.target.files[0])
+  }
+  return (
+    <div className="myfileupload-buttonbar ">
+
+      <label className="myui-button">
+        <span>Add Files</span>
+        <input id="file" type="file" name="files[]" onChange={onChange} />
+        <span></span>
+      </label>
+
+    </div>
   );
 }
+
 
 function ModalAddNew(props) {
   console.log(props)
   const dispatch = useDispatch()
   const { push } = useHistory()
-  const { info, posts, pristine  } = props
-  
+  const { info, posts} = props
 
+  // const [state, setState] = useState("Không có tệp nào")
+  const [state, setState] = useState(info?.images[1])
   useEffect(() => {
     if (info) {
       console.log(info)
       dispatch(change('EditData', 'id', info?.id))
-      dispatch(change('EditData', 'image', info?.images[1]))
+      // dispatch(change('EditData', 'image', info?.images[1]))
       dispatch(change('EditData', 'title', info?.title))
       dispatch(change('EditData', 'price', info?.price))
       dispatch(change('EditData', 'amount', info?.allAmount))
@@ -75,11 +73,30 @@ function ModalAddNew(props) {
   }, [info])
 
   const submit = (values) => {
-    
+    console.log("check image", values.image)
+    if(values.image) {
       props.actions.edit_info(values);
-      // //success => router to admin
-      // push('/admin')
-    } 
+    }
+    else {
+      let arrow = Object.assign({}, values)
+      arrow.image = info?.images[1];
+      props.actions.edit_info(arrow);
+    }
+     
+    // //success => router to admin
+    // push('/admin')
+  }
+  const onChange = (values) => {
+    if (values) {
+        setState(values.name)
+    } else {
+        setState("Không có tệp nào")
+    }
+}
+const onClickDelete= (values) =>{
+    setState(info?.images[1])
+    props.change('image', info?.images[1]);
+}
 
   const { handleSubmit, submitting } = props
   return (
@@ -97,10 +114,11 @@ function ModalAddNew(props) {
         </div>
         <div className="col-md-12">
           <label className="form-label">Image</label>
-          <Field className="form-control" name="image" type="text"
+          <Field className="form-control" name="image" type="file"
             component={renderUploadFile}
+            onChange={onChange}
           />
-          
+         <div className="show_name">{state} <span><TiDeleteOutline onClick={onClickDelete}/></span></div>
         </div>
         <div className="col-md-12">
           <label className="form-label">Title</label>
@@ -112,14 +130,14 @@ function ModalAddNew(props) {
         </div>
         <div className="col-md-12">
           <label className="form-label">Price</label>
-          <Field className="form-control" name="price" type="text"
+          <Field className="form-control" name="price" type="number"
             component={renderField}
             validate={[required, number]}
           />
         </div>
         <div className="col-md-12">
           <label className="form-label">Amount</label>
-          <Field className="form-control" name="amount" type="text"
+          <Field className="form-control" name="amount" type="number"
             component={renderField}
             validate={[required, number]}
           />

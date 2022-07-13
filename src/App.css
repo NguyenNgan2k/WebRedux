@@ -183,7 +183,7 @@ input[type="text"] {
   padding: 0px 15px
 }
 
-.myfileupload-buttonbar input {
+/* .myfileupload-buttonbar input {
   position: absolute;
   top: 0;
   right: 0;
@@ -206,7 +206,7 @@ input[type="text"] {
   padding: 10px;
   color: #fff;
   border-radius: 0.2rem;
-}
+} */
 .show_name {
   margin: 15px;
 }
@@ -269,4 +269,55 @@ h5 {
   width: 100% ;
   margin: 0;
   font-weight: bold;
+}
+.bill_container {
+  background-color: #fff;
+  margin-top: 50px;
+}
+.bill_info {
+  display: flex;
+  padding: 40px 40px 0 40px;
+  font-weight: bold;
+}
+.collum2{
+  margin-left: 50px;
+}
+.bill_product {
+  background-color: #eefef1;
+}
+.bill_product td {
+  font-size: 18px;
+}
+.total {
+font-weight: bold
+}
+.total_color {
+  color: #121f3d;
+  font-size: 20px  !important;
+}
+input[type="number"] {
+  width: 100%;
+  padding: 10px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  overflow: scroll;
+  max-height: 250px;
+}
+.box {
+  margin: 10px;
+  padding: 5px;
+  position: relative;
+}
+.box img {
+  width: 50%;
+  height: 50%;
+  
+  
+}
+.box span {
+  position: absolute;
+  top: 0;
+  z-index: 1;
 }

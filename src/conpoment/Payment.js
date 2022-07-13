@@ -9,9 +9,12 @@ function Payment(props) {
     const history = useHistory()
     const submit = (values) => {
         console.log(values)
+        props.actions.add_bill(values)
         history.push('/bill')
     }
+
     const { payments, handleSubmit } = props
+ 
     return (
 
         <div className="container order ">
@@ -46,7 +49,7 @@ function Payment(props) {
                                 />
                             </div>
                             <div className="col-md-12 user">
-                                <button type="submit" className="btn btn-primary">ĐẶT HÀNG</button>
+                                <button type="submit" className="btn btn-primary ">ĐẶT HÀNG</button>
                             </div>
                         </form>
                     </div>

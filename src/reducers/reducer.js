@@ -1,13 +1,14 @@
 import * as _ from "lodash";
 import { assign } from "lodash";
 import { act } from "react-dom/test-utils";
-import { GET_LIST_POST, GET_LIST_POST_SUCCESS, ADD_STORE, DELETE_STORE, UPDATE_AMOUNT, SUB_AMOUNT, ADD_POST, GET_INFO, EDIT_INFO, DELETE_PRODUCT, ADD_PAYMENT, DELETE_PAYMENT, CLEAR_PAYMENT, UPDATE_PAYMENT } from "../constant";
+import { GET_LIST_POST, GET_LIST_POST_SUCCESS, ADD_STORE, DELETE_STORE, UPDATE_AMOUNT, SUB_AMOUNT, ADD_POST, GET_INFO, EDIT_INFO, DELETE_PRODUCT, ADD_PAYMENT, DELETE_PAYMENT, CLEAR_PAYMENT, UPDATE_PAYMENT, ADD_BILL } from "../constant";
 const INITIAL_STATE = {
     posts: [],
     load: false,
     stores: [],
     info: null,
-    payments: []
+    payments: [],
+    bill:{}
 };
 
 export const reducer = (state = INITIAL_STATE, action) => {
@@ -94,7 +95,7 @@ export const reducer = (state = INITIAL_STATE, action) => {
                         images: [
                             pro.image?.name || null
                         ],
-                        allAmount: pro.allAmount,
+                        allAmount: pro.amount,
 
                     },
                     ...state.posts],
@@ -158,7 +159,20 @@ export const reducer = (state = INITIAL_STATE, action) => {
                 payments: []
             }
         
-       
+        case ADD_BILL:
+            const {billInfor} =action
+            console.log(action)
+            return {
+                ...state,
+                bill: 
+                    {
+                        name: billInfor.name,
+                        address: billInfor.address,
+                        phone: billInfor.phone,
+                        note: billInfor.note,              
+                    },
+                
+            }
         default:
             return state;
     }

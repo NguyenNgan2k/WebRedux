@@ -13,3 +13,4 @@ export const DELETE_PAYMENT = 'DELETE_PAYMENT';
 export const DELETE_PRODUCT = 'DELETE_PRODUCT';
 export const CLEAR_PAYMENT = 'CLEAR_PAYMENT';
 export const UPDATE_PAYMENT = 'UPDATE_PAYMENT';
+export const ADD_BILL = 'ADD_BILL';
